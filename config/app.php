@@ -169,6 +169,7 @@ return [
 
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        Menu\MenuServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Menu' => Menu\Menu::class,
     ],
 
 ];

@@ -9,7 +9,10 @@
         "ext-yaml": "*",
         "laravel/framework": "5.3.*",
         "cviebrock/eloquent-sluggable": "^4.1",
-        "baum/baum": "^1.1"
+        "baum/baum": "^1.1",
+        "erusev/parsedown": "^1.6",
+        "roumen/feed": "^2.10",
+        "vespakoen/menu": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
