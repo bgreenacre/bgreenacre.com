@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f65a70752ad48178abf0133c21908723",
+    "content-hash": "67f8ee3f6f5d79c7e26fc72b4755fbfa",
     "packages": [
         {
             "name": "baum/baum",
@@ -3613,7 +3613,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.4"
+        "php": ">=5.6.4",
+        "ext-yaml": "*"
     },
     "platform-dev": []
 }

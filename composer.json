@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "ext-yaml": "*",
         "laravel/framework": "5.3.*",
         "cviebrock/eloquent-sluggable": "^4.1",
         "baum/baum": "^1.1"
