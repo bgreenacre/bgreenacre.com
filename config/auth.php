@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Bgreenacre\User::class,
+            'model' => Bgreenacre\Users\UserModel::class,
         ],
 
         // 'users' => [
