@@ -168,6 +168,7 @@ return [
          */
 
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
         /*
          * Application Service Providers...
