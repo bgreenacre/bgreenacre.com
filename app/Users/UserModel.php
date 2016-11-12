@@ -4,10 +4,15 @@ namespace Bgreenacre\Users;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Bgreenacre\Interfaces\EloquentValidationInterface;
+use Bgreenacre\Traits\EloquentRulesAndErrorsTrait;
 
-class UserModel extends Authenticatable
+class UserModel extends Authenticatable implements EloquentValidationInterface
 {
     use Notifiable;
+    use EloquentRulesAndErrorsTrait;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +20,7 @@ class UserModel extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -26,4 +31,10 @@ class UserModel extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany('Bgreenacre\Roles\RoleModel', 'users_roles', 'user_id', 'role_id');
+    }
+
 }
