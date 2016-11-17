@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->bindObservers();
     }
 
     /**
@@ -25,4 +25,14 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+    protected function bindObservers()
+    {
+        \Bgreenacre\Posts\PostModel::observe($this->app->make('\Bgreenacre\Posts\PostValidator'));
+        \Bgreenacre\Roles\RoleModel::observe($this->app->make('\Bgreenacre\Roles\RoleValidator'));
+        \Bgreenacre\TaxonomyTerms\TaxonomyTermModel::observe($this->app->make('\Bgreenacre\TaxonomyTerms\TaxonomyTermValidator'));
+        \Bgreenacre\Types\TypeModel::observe($this->app->make('\Bgreenacre\Types\TypeValidator'));
+        \Bgreenacre\Users\UserModel::observe($this->app->make('\Bgreenacre\Users\UserValidator'));
+    }
+
 }
