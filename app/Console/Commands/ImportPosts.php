@@ -3,6 +3,9 @@
 namespace Bgreenacre\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Contracts\Config\Repository as Config;
+use Bgreenacre\Posts\FileImporter as PostsImporter;
 
 class ImportPosts extends Command
 {
@@ -11,7 +14,7 @@ class ImportPosts extends Command
      *
      * @var string
      */
-    protected $signature = 'import:posts';
+    protected $signature = 'import:posts {path? : Path to where post files exist.}';
 
     /**
      * The console command description.
@@ -20,14 +23,22 @@ class ImportPosts extends Command
      */
     protected $description = 'Import all posts from directory';
 
+    protected $config;
+    protected $importer;
+    protected $files;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Filesystem $files, Config $config, PostsImporter $importer)
     {
         parent::__construct();
+
+        $this->files = $files;
+        $this->config = $config;
+        $this->importer = $importer;
     }
 
     /**
@@ -37,6 +48,22 @@ class ImportPosts extends Command
      */
     public function handle()
     {
-        //
+        $path = $this->argument('path') ?: $this->config->get('blog.paths.posts');
+
+        $path = realpath($path);
+
+        if ( ! $path)
+        {
+            $this->error('Invalid path for File Importer.');
+
+            exit(1);
+        }
+
+        $files = glob($path . '/*.md');
+
+        foreach ($files as $file)
+        {
+            $this->importer->import($file);
+        }
     }
 }
