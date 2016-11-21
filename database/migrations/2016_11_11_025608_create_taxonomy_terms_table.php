@@ -73,7 +73,7 @@ class CreateTaxonomyTermsTable extends Migration
                 $table->dropForeign('fk_posts_4');
             }
 
-            if (Schema::hasColument('posts', 'un_posts_1'))
+            if (Schema::hasColumn('posts', 'un_posts_1'))
             {
                 $table->dropUnique('un_posts_1');
             }
