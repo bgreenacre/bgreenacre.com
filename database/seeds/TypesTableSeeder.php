@@ -24,6 +24,7 @@ class TypesTableSeeder extends Seeder
                 $typeAdded = (bool) TypeModel::where('context', $context)
                     ->where('name', $name)
                     ->take(1)
+                    ->get()
                     ->count();
 
                 if ($typeAdded === false)

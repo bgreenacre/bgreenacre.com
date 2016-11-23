@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('type_id')->unsigned();
             $table->integer('author_id')->unsigned();
             $table->enum('status', array('publish', 'draft', 'private'))->default('publish');
+            $table->string('template')->nullable();
             $table->string('slug');
             $table->string('title');
             $table->string('excerpt', 1000)->nullable();

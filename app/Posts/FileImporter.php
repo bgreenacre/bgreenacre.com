@@ -50,6 +50,53 @@ class FileImporter {
 
 		$meta    = yaml_parse($parts[0]);
 		$body    = trim($parts[1]);
+		$post = $this->posts->where('title', array_get($meta, 'title'))->get();
+
+		if ($post->count() == 0)
+		{
+			$post = clone $this->posts;
+		}
+
+
+		$publishDate = (preg_match('/[0-9]{2,4}-[0-9]{2}-[0-9]{2}/', $filePath, $match) > 0)
+					 ? $match[0] : null;
+
+		$post->status       = array_get($meta, 'Status', 'publish');
+		$post->slug         = array_get($meta, 'Title');
+		$post->title        = array_get($meta, 'Title');
+		$post->publish_date = array_get($meta, 'Publish', $publishDate);
+		$post->excerpt      = array_get($meta, 'Excerpt');
+		$post->template     = array_get($meta, 'Template', 'pages.post');
+		$post->is_in_menu   = array_get($meta, 'IsInMenu', false);
+		$post->order 		= array_get($meta, 'Order');
+		$post->content      = $body;
+
+		$type = $this->types
+			->forPosts()
+			->where('name', array_get($meta, 'Type', 'article'), 'post')
+			->get();
+
+			dd($type);
+
+		if ($type->count() > 0)
+		{
+			$post->type()->associate($type);
+		}
+
+		$author = $this->users->where('username', array_get($meta, 'Author'))->get();
+
+		if ($author->count() > 0)
+		{
+			$post->author()->associate($author);
+		}
+
+		if ($post->save())
+		{
+		}
+        else
+        {
+        	dd($post->getErrors()->all());
+        }
 	}
 
 }

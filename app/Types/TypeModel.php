@@ -14,4 +14,9 @@ class TypeModel extends Model implements EloquentValidationInterface
     protected $table = 'types';
     public $timestamps = false;
 
+    public function scopeForPosts($query)
+    {
+    	return $query->where('context', 'post');
+    }
+
 }
