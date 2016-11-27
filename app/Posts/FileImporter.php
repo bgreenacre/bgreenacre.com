@@ -3,6 +3,7 @@
 namespace Bgreenacre\Posts;
 
 use Exception;
+use Bgreenacre\Exceptions\StorageValidationException;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Bgreenacre\Users\UserModel;
 use Bgreenacre\Roles\RoleModel;
@@ -50,7 +51,7 @@ class FileImporter {
 
 		$meta    = yaml_parse($parts[0]);
 		$body    = trim($parts[1]);
-		$post = $this->posts->where('title', array_get($meta, 'title'))->get();
+		$post = $this->posts->where('title', array_get($meta, 'Title'))->first();
 
 		if ($post->count() == 0)
 		{
@@ -62,7 +63,6 @@ class FileImporter {
 					 ? $match[0] : null;
 
 		$post->status       = array_get($meta, 'Status', 'publish');
-		$post->slug         = array_get($meta, 'Title');
 		$post->title        = array_get($meta, 'Title');
 		$post->publish_date = array_get($meta, 'Publish', $publishDate);
 		$post->excerpt      = array_get($meta, 'Excerpt');
@@ -74,7 +74,7 @@ class FileImporter {
 		$type = $this->types
 			->forPosts()
 			->where('name', array_get($meta, 'Type', 'article'), 'post')
-			->get();
+			->first();
 
 		if ($type->count() > 0)
 		{
@@ -93,7 +93,7 @@ class FileImporter {
 		$author = $this->users
 		    ->where('username', 'like', array_get($meta, 'Author'))
 		    ->orWhere('first_name', 'like', array_get($meta, 'Author'))
-		    ->get();
+		    ->first();
 
 		if ($author->count() > 0)
 		{
@@ -114,7 +114,7 @@ class FileImporter {
 		}
 		else
 		{
-			dd($post->getErrors());
+			throw new StorageValidationException(get_class($post), $post->getErrors());
 		}
 	}
 

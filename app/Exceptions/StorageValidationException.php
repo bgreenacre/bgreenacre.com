@@ -1,4 +1,6 @@
-<?php namespace Bgreenacre\Exceptions;
+<?php
+
+namespace Bgreenacre\Exceptions;
 
 use Illuminate\Support\MessageBag;
 use Exception;

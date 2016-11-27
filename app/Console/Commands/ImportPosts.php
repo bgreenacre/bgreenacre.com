@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Contracts\Config\Repository as Config;
 use Bgreenacre\Posts\FileImporter as PostsImporter;
+use Bgreenacre\Exceptions\StorageValidationException;
 
 class ImportPosts extends Command
 {
@@ -66,6 +67,17 @@ class ImportPosts extends Command
             try
             {
                 $this->importer->import($file);
+            }
+            catch (StorageValidationException $e)
+            {
+                $this->error(
+                    sprintf(
+                        "The following errors occurred while trying to save a post:\n%s",
+                        implode("\n", $e->errors()->all())
+                    )
+                );
+                $this->error('Exiting...');
+                exit(1);
             }
             catch (Exception $e)
             {

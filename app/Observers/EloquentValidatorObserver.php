@@ -1,4 +1,6 @@
-<?php namespace Bgreenacre\Observers;
+<?php
+
+namespace Bgreenacre\Observers;
 
 use Closure;
 use Illuminate\Validation\Factory as Validator;

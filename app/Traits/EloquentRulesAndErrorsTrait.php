@@ -1,4 +1,6 @@
-<?php namespace Bgreenacre\Traits;
+<?php
+
+namespace Bgreenacre\Traits;
 
 use Illuminate\Support\MessageBag;
 

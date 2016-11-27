@@ -1,4 +1,6 @@
-<?php namespace Bgreenacre\Interfaces;
+<?php
+
+namespace Bgreenacre\Interfaces;
 
 use Illuminate\Support\MessageBag;
 
