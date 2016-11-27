@@ -63,7 +63,16 @@ class ImportPosts extends Command
 
         foreach ($files as $file)
         {
-            $this->importer->import($file);
+            try
+            {
+                $this->importer->import($file);
+            }
+            catch (Exception $e)
+            {
+                $this->error($e->getMessage());
+                $this->error('Exiting...');
+                exit(1);
+            }
         }
     }
 }

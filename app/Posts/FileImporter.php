@@ -76,27 +76,46 @@ class FileImporter {
 			->where('name', array_get($meta, 'Type', 'article'), 'post')
 			->get();
 
-			dd($type);
-
 		if ($type->count() > 0)
 		{
 			$post->type()->associate($type);
 		}
+		else
+		{
+			throw new Exception(
+				sprintf(
+					'Cannot find type %s in system.',
+					array_get($meta, 'Type', 'article')
+				)
+			);
+		}
 
-		$author = $this->users->where('username', array_get($meta, 'Author'))->get();
+		$author = $this->users
+		    ->where('username', 'like', array_get($meta, 'Author'))
+		    ->orWhere('first_name', 'like', array_get($meta, 'Author'))
+		    ->get();
 
 		if ($author->count() > 0)
 		{
 			$post->author()->associate($author);
 		}
+		else
+		{
+			throw new Exception(
+				sprintf(
+					'Cannot find author with username or First Name of %s in system.',
+					array_get($meta, 'Author')
+				)
+			);
+		}
 
 		if ($post->save())
 		{
 		}
-        else
-        {
-        	dd($post->getErrors()->all());
-        }
+		else
+		{
+			dd($post->getErrors());
+		}
 	}
 
 }
