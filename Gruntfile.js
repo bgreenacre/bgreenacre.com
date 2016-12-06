@@ -15,7 +15,25 @@ module.exports = function ( grunt )
             }
         },
         less: {
-            all: {
+            dist: {
+                options: {
+                    paths: [
+                        "public/css"
+                    ],
+                    compress: true
+                },
+                files: [ {
+                    src: [ "resources/less/main.less" ],
+                    dest: "public/css/main.min.css",
+                } ]
+            },
+            dev: {
+                options: {
+                    paths: [
+                        "public/css"
+                    ],
+                    compress: false
+                },
                 files: [ {
                     src: [ "resources/less/main.less" ],
                     dest: "public/css/main.css",
