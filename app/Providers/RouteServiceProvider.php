@@ -3,6 +3,7 @@
 namespace Bgreenacre\Providers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -51,10 +52,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
+        $router = $this->app->make(Router::class);
+        $router->group([
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {
+            $router->get('/', 'HomeController@index')->name('homepage');
         });
     }
 

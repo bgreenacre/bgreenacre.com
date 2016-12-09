@@ -6,12 +6,24 @@ module.exports = function ( grunt )
         pkg: grunt.file.readJSON( "package.json" ),
         copy: {
             dist: {
-                src: "node_modules/jquery/dist/jquery.min.js",
-                dest: "public/js/jquery.min.js"
+                files: [ {
+                    src: "node_modules/jquery/dist/jquery.min.js",
+                    dest: "public/js/jquery.min.js"
+                },
+                {
+                    src: "node_modules/bootstrap/dist/js/bootstrap.min.js",
+                    dest: "public/js/bootstrap.min.js"
+                } ]
             },
             dev: {
-                src: "node_modules/jquery/dist/jquery.js",
-                dest: "public/js/jquery.js"
+                files: [ {
+                    src: "node_modules/jquery/dist/jquery.js",
+                    dest: "public/js/jquery.js"
+                },
+                {
+                    src: "node_modules/bootstrap/dist/js/bootstrap.js",
+                    dest: "public/js/bootstrap.js"
+                }]
             }
         },
         less: {

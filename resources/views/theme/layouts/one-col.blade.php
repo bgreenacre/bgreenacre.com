@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('partials/head')
+@include('theme.partials.head')
 <body>
-@include('partials/header')
-@include('partials/footer')
+@include('theme.partials.header')
+@include('theme.partials.footer')
 </body>
 </html>
