@@ -1,6 +1,6 @@
 <head>
 	<meta charset="utf-8">
-	<title>@yield('page.title', '')</title>
+	<title>@yield('page.title', 'bgreenacre')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="@yield('page.description', '')">
     <meta name="author" content="bgreenacre">

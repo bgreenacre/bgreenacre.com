@@ -6,8 +6,11 @@
 <div class="container">
     @yield('content.top')
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
         @yield('content')
+        </div>
+        <div class="col-sm-4">
+        @yield('sidebar')
         </div>
     </div>
     @yield('content.bottom')

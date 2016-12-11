@@ -19,4 +19,5 @@ class HomeController extends Controller
 	{
 		return $this->view->make('theme/pages/homepage');
 	}
+
 }
